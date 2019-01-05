@@ -1,5 +1,14 @@
 <html>
 <style>
+#scrollbox {
+    overflow: scroll;
+    width: 770px;
+    height: 200px;
+	color: white;
+	background-color: #119441;
+	font-family: arial;
+}
+
 body {
 border: 50px solid #144722;
 }
@@ -65,6 +74,7 @@ body {
 }
 </style>
     <head>
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
         <script type="text/javascript">
         
         	var token;
@@ -115,6 +125,9 @@ body {
     </head>
 	
 	<body>
+	<img src="images/banner.png" alt="Groovify logo" style="width:60%;">
+	<br>
+	<br>
 	
 		<button class="button" onclick=createRoom()><strong>Create Room</strong></button>
 		<button class="button" onclick=addSong()>Add Song</button>
@@ -137,6 +150,8 @@ body {
 	       	}
 		
 		</script>
+		<br>
+		<br>
 		<button class="collapsible">Click to open</button>
 			<div class="content">
 				<p>Insert content here</p>
@@ -157,6 +172,24 @@ body {
 			});
 			}
 		</script>
+			<br>
+			<br>
+			<div id="scrollbox">
+			</div>
+			<a onclick="addElement()">Click to add</a>
+			<script>
+				function addElement() {
+				var scrollbox = document.getElementById('scrollbox');
+    
+				// Create some element, e.g. div
+				var newElement = document.createElement('div');
+				newElement.setAttribute('id', "some-id-for-new-element");
+    
+				newElement.innerHTML = 'New element has been added!';
+    
+				scrollbox.appendChild(newElement);
+				}
+			</script>
 	</body>
 
 
