@@ -11,5 +11,8 @@ public class User {
 		this.spotifyApi = spotifyApi;
 		
 	}
+	public String getToken() {
+		return spotifyApi.getAccessToken();
+	}
 	
 }
