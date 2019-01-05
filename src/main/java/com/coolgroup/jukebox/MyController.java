@@ -30,7 +30,7 @@ public class MyController{// implements ApplicationRunner{
 	public String hello() {
 	   //return gameUpdater.getGame().getItems();
 		
-		System.out.println("lll");
+		//System.out.println("lll");
 		Authenticator authenticator  = new Authenticator();
 		
 		return authenticator.authorizationCodeUri_Async();
@@ -43,7 +43,7 @@ public class MyController{// implements ApplicationRunner{
 		
 		Authenticator authenticator = new Authenticator();
 		
-		SpotUser user = new SpotUser(authenticator.authorizationCode_Async(code));
+		SpotUser user = new SpotUser(authenticator.authorizationCode_Async(code), apiManager);
 		users.add(user);
 		spotUsers.add(user);
 		
@@ -69,14 +69,28 @@ public class MyController{// implements ApplicationRunner{
 		
 	}
 	
+	@RequestMapping(value = "/fetchQueue")
+	public String fetchQueue(@RequestParam("token") String token) {
+		
+		for(User user : users) {
+			
+			if(user.getToken().equals(token)) {
+				
+				return user.fetchQueue();
+				
+			}
+			
+		}
+		
+		return "error";
+	}
+	
 	@RequestMapping(value = "/createRoom")
 	public String createRoom(@RequestParam("token") String token) {
-		
+		System.out.println("creating room");
 		for(SpotUser user : spotUsers) {
 			if(token.equals(user.getToken())) {
-				user.addPlaylist();
-				//dummy change
-				return "";
+				return user.createRoom();
 			}
 		}
 		

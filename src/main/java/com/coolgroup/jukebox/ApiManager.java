@@ -18,6 +18,7 @@ public class ApiManager {
 			return track.execute();
 		}
 		catch(Exception e) {
+			System.out.println(e);
 			return null;
 		}
  	}

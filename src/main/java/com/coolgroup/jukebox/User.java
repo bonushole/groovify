@@ -1,5 +1,6 @@
 package com.coolgroup.jukebox;
 
+import com.google.gson.Gson;
 import com.wrapper.spotify.model_objects.specification.Track;
 
 public class User {
@@ -8,23 +9,35 @@ public class User {
 	Room room;
 	ApiManager apiManager;
 	
-	public User() {}
+	public User(ApiManager apiManager) {
+		this.apiManager = apiManager;
+	}
 	
 	public User(Room room, ApiManager apiManager) {
 		
 		this.room = room;
 		this.apiManager = apiManager;
+		token = KeyGenerator.generateKey();
 		
 	}
 	
 	public String getToken() {
 		
-		return "";
+		return token;
 	}
+	
 	public void addSong() {
 		
-		Track song = apiManager.getTrack((Math.random()>.5)? "spotify:track:5QIbR39hAEDIOkr4ggh4xc":"spotify:track:3WibbMr6canxRJXhNtAvLU");
+		System.out.println("we made it here");
+		Track song = room.getTrack((Math.random()>.5)? "5QIbR39hAEDIOkr4ggh4xc":"3WibbMr6canxRJXhNtAvLU");
+		System.out.println(song);
 		room.addTrack(song);
+	}
+	public String fetchQueue() {
+		
+		Gson gson = new Gson();
+		return gson.toJson(room.fetchSongs());
+		
 	}
 	
 }
