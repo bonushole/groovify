@@ -1,8 +1,11 @@
 <html>
 <head>
-	<link rel='icon' href='favicon.ico' type='image/x-icon'/ >
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
 </head>
 <style>
+body {
+border: 50px solid #144722;
+}
 img {
   display: block;
   margin-left: auto;
@@ -20,7 +23,13 @@ p {
 	color: white;
 	}
 h2 {
-	color: white; }
+	color: white;
+text-align: center;
+font-size: 24px;	}
+h3 {
+	color: white;
+	font-size: 24px;
+	}
 .button {
   background-color: #119441;
   border: none;
@@ -42,10 +51,12 @@ h2 {
 	<h1><strong>Welcome to Groovify!</strong></h1>
 	<img src="images/thelogo3.png" alt="Groovify logo" style="width:20%;">
 	<div id="welcome">
-		<h2>What is Groovify?</h2>
+		<h3>What is Groovify?</h2>
 			<p>Groovify is a communal playlist website that is based on Spotify's API. Multiple people can queue songs to a single Spotify playlist instead of one person making the entire playlist or creating a group playlist ahead of time. Groovify is meant to continously play songs that anybody can easily queue at anytime from their own accounts. If the queue finishes without another song being added, Groovify will then play random songs so that the tunes never stop. Groovify takes the tedious task of creating live playlists and streamlines it into an easy to use website.</p>
 		<h2>Click here to login to Spotify.</h2>
+		<div style="text-align:center;">
 			<button class="button" onclick=httpGET()><strong>Login</strong></button>
+		</div>
 </body>
 <script>
 
