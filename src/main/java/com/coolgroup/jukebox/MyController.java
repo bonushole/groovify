@@ -21,7 +21,7 @@ import org.springframework.stereotype.Controller;
 @CrossOrigin
 public class MyController{// implements ApplicationRunner{
 	
-	ArrayList users = new ArrayList();
+	ArrayList<User> users = new ArrayList();
 	
 	@RequestMapping(value = "/")
 	public String hello() {
@@ -38,7 +38,20 @@ public class MyController{// implements ApplicationRunner{
 	public String callBack(@RequestParam("code") String code) {
 		
 		Authenticator authenticator = new Authenticator();
-		users.add(new User(authenticator.authorizationCode_Async(code)));
+		
+		User user = new User(authenticator.authorizationCode_Async(code));
+		users.add(user);
+		
+		return user.getToken();
+	}
+	@RequestMapping(value = "/addPlaylist")
+	public String AddPlaylist() {
+		
+		for(User user : users) {
+			if() {
+				
+			}
+		}
 		
 		return "";
 	}

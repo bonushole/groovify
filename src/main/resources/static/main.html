@@ -1,0 +1,46 @@
+<html>
+
+    <head>
+        <script type="text/javascript">
+        
+	       	var HttpClient = function() {
+	       		this.get = function(aUrl, aCallback) {
+	       	    var anHttpRequest = new XMLHttpRequest();
+	       	    anHttpRequest.onreadystatechange = function() { 
+	       	        if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
+	       	            aCallback(anHttpRequest.responseText);
+	       		}
+	       	
+	       		anHttpRequest.open( "GET", aUrl, true );            
+	       		anHttpRequest.send( null );
+	       	    	}
+	       	}
+	       	
+	       	function authenticate(){
+	       		//document.getElementById("demo").innerHTML = "running";
+	       		var client = new HttpClient();
+	       		var url_string = window.location.href; //window.location.href
+	       		var url = new URL(url_string);
+	       		var code = url.searchParams.get("code");
+	       		client.get('http://localhost:8080/callback?code=' + code , function(response) {
+	       		    
+	       			var token = response;
+	       			//document.getElementById("demo").innerHTML = response;
+	       			
+	       		});
+	       	}
+	       
+        	window.onload = authenticate();
+        </script>
+    </head>
+	
+	<body>
+	
+		<script>
+		
+		</script>
+	
+	</body>
+
+
+</html>
