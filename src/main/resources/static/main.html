@@ -1,19 +1,46 @@
 <html>
 <style>
+body {
+border: 50px solid #144722;
+}
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+body {
+	background-color: #144722;
+	font-family: arial;}
+	
+.button {
+  background-color: #119441;
+  border: none;
+  color: white;
+  padding: 12px 35px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+.button {border-radius: 6px;
+		box-shadow:0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);}
+
+.button:hover {
+  background-color: #10a949;
+}
+
 .collapsible {
-  background-color: #777;
+  background-color: #119441;
   color: white;
   cursor: pointer;
-  padding: 18px;
+  padding: 12px 35px;
   width: 100%;
   border: none;
   text-align: left;
   outline: none;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .active, .collapsible:hover {
-  background-color: #555;
+  background-color: #10a949;
 }
 
 .collapsible:after {
@@ -30,10 +57,11 @@
 
 .content {
   padding: 0 18px;
+  color: white;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
-  background-color: #f1f1f1;
+  background-color: #34c137;
 }
 </style>
     <head>
