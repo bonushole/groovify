@@ -11,10 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 
-import com.wrapper.spotify.SpotifyApi;
-import com.wrapper.spotify.SpotifyHttpManager;
-import com.wrapper.spotify.requests.authorization.authorization_code.AuthorizationCodeUriRequest;
-
 @Controller
 @ResponseBody
 @CrossOrigin
@@ -23,7 +19,6 @@ public class MyController{// implements ApplicationRunner{
 	@RequestMapping(value = "/")
 	public String hello() {
 	   //return gameUpdater.getGame().getItems();
-		//SpotifyApi spotapi = new SpotifyApi;
 		return "suck my pp";
 	
 	}
