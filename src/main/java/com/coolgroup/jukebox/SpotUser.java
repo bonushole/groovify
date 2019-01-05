@@ -9,6 +9,7 @@ import com.wrapper.spotify.model_objects.specification.Playlist;
 import com.wrapper.spotify.model_objects.specification.Track;
 import com.wrapper.spotify.requests.data.playlists.AddTracksToPlaylistRequest;
 import com.wrapper.spotify.requests.data.playlists.CreatePlaylistRequest;
+import com.wrapper.spotify.requests.data.tracks.GetTrackRequest;
 import com.wrapper.spotify.requests.data.users_profile.GetCurrentUsersProfileRequest;
 
 public class SpotUser extends User{
@@ -17,7 +18,9 @@ public class SpotUser extends User{
 	String userID;
 	com.wrapper.spotify.model_objects.specification.User spotifyUser;
 	
-	public SpotUser(SpotifyApi spotifyApi){
+	public SpotUser(SpotifyApi spotifyApi, ApiManager apiManager){
+		
+		super(apiManager);
 		
 		this.spotifyApi = spotifyApi;
 		GetCurrentUsersProfileRequest profileRequest = spotifyApi.getCurrentUsersProfile().build();
@@ -38,18 +41,19 @@ public class SpotUser extends User{
 		return spotifyApi.getAccessToken();
 	}
 	
-	public void createRoom() {
+	public String createRoom() {
 		
 		room = new Room(this, addPlaylist());
+		return room.getKey();
 		
 	}
 	
 	public Playlist addPlaylist() {
 		
-		CreatePlaylistRequest request = spotifyApi.createPlaylist(userID, "new Playlist").collaborative(false).public_(false).description("sup bruv").build();
+		CreatePlaylistRequest request = spotifyApi.createPlaylist(userID, "groovify_workspace").collaborative(false).public_(false).description("sup bruv").build();
 		
 		try {
-		      final Playlist playlist = request.execute();
+		      Playlist playlist = request.execute();
 
 		      System.out.println("Name: " + playlist.getName());
 		      
@@ -60,10 +64,26 @@ public class SpotUser extends User{
 		    }
 		
 	}
+	public Track getTrack(String id) {
+		GetTrackRequest track = spotifyApi.getTrack(id).build();
+		try {
+			return track.execute();
+		}
+		catch(Exception e) {
+			System.out.println(e);
+			return null;
+		}
+	}
+	
 	public void addTrackToPlaylist(Track track, Playlist playlist) {
-		  AddTracksToPlaylistRequest addTracksToPlaylistRequest = spotifyApi.addTracksToPlaylist(playlist.getId(),new String[] {track.getUri()}).position(0).build();
+		AddTracksToPlaylistRequest addTracksToPlaylistRequest = spotifyApi.addTracksToPlaylist(playlist.getId(),new String[] {track.getUri()}).position(0).build();
 		
-		
+		try {
+			
+			addTracksToPlaylistRequest.execute();
+			
+		}catch(Exception e) {}
+		  
 	}
 	
 }

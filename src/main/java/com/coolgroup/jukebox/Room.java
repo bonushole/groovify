@@ -17,6 +17,7 @@ public class Room {
 		
 		this.owner = owner;
 		this.playlist = playlist;
+		key = KeyGenerator.generateKey();
 		
 	}
 	
@@ -36,9 +37,23 @@ public class Room {
 		owner.addTrackToPlaylist(track, playlist);
 		
 	}
+	public Track getTrack(String id) {
+		return owner.getTrack(id);
+	}
 	public void updatePlaylist() {
 		
 		
+		
+	}
+	public ArrayList<SongsForGson> fetchSongs() {
+		
+		ArrayList<SongsForGson> elements = new ArrayList<SongsForGson>();
+		
+		for (Track track : tracks) {
+			
+			elements.add(new SongsForGson(track.getName()));
+		}
+		return elements;
 		
 	}
 	

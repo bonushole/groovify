@@ -97,15 +97,16 @@ body {
 		       			
 		       		});
 	       		}
-	       		else if{
+	       		else if(key!=null){
 		       		client.get('http://10.70.8.120:8080/nonspotuser?roomkey=' + key , function(response) {
 		       		    
 			       	token = response;
 	       			
+	       			});
 	       		}
 		       	else{
 		       		window.alert("no code you constipated rat");
-		       	}
+		       	
 		       	}
 	       	}
 	       
@@ -115,18 +116,22 @@ body {
 	
 	<body>
 	
-		<button class="button" onclick=httpGET()><strong>Create Room</strong></button>
-		<button class="button" onclick=>Add Song</button>
+		<button class="button" onclick=createRoom()><strong>Create Room</strong></button>
+		<button class="button" onclick=addSong()>Add Song</button>
 	
 		<script>
 		
-			function httpGET(){
+			function createRoom(){
 	       		//document.getElementById("demo").innerHTML = "running";
 	       		var client = new HttpClient();
 	       		client.get('http://10.70.8.120:8080/createRoom?token=' + token , function(response) {
-	       		    
-	       			var token = response;
-	       			//document.getElementById("demo").innerHTML = response;
+	       		    window.alert(response);
+	       		});
+	       	}
+			function addSong(){
+	       		//document.getElementById("demo").innerHTML = "running";
+	       		var client = new HttpClient();
+	       		client.get('http://10.70.8.120:8080/addSong?token=' + token , function(response) {
 	       			
 	       		});
 	       	}
