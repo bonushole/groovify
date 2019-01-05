@@ -6,6 +6,8 @@ import java.util.concurrent.Future;
 import com.wrapper.spotify.SpotifyApi;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import com.wrapper.spotify.model_objects.specification.Playlist;
+import com.wrapper.spotify.model_objects.specification.Track;
+import com.wrapper.spotify.requests.data.playlists.AddTracksToPlaylistRequest;
 import com.wrapper.spotify.requests.data.playlists.CreatePlaylistRequest;
 import com.wrapper.spotify.requests.data.users_profile.GetCurrentUsersProfileRequest;
 
@@ -35,21 +37,32 @@ public class SpotUser extends User{
 	public String getToken() {
 		return spotifyApi.getAccessToken();
 	}
-	public void addPlaylist() {
+	
+	public void createRoom() {
+		
+		room = new Room(this, addPlaylist());
+		
+	}
+	
+	public Playlist addPlaylist() {
 		
 		CreatePlaylistRequest request = spotifyApi.createPlaylist(userID, "new Playlist").collaborative(false).public_(false).description("sup bruv").build();
 		
 		try {
-		      final Future<Playlist> playlistFuture = request.executeAsync();
-
-		      // ...
-
-		      final Playlist playlist = playlistFuture.get();
+		      final Playlist playlist = request.execute();
 
 		      System.out.println("Name: " + playlist.getName());
+		      
+		      return playlist;
 		    } catch (Exception e) {
 		      System.out.println("Error: " + e.getCause().getMessage());
+		      return null;
 		    }
+		
+	}
+	public void addTrackToPlaylist(Track track, Playlist playlist) {
+		  AddTracksToPlaylistRequest addTracksToPlaylistRequest = spotifyApi.addTracksToPlaylist(playlist.getId(),new String[] {track.getUri()}).position(0).build();
+		
 		
 	}
 	

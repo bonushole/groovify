@@ -87,14 +87,15 @@
 	
 	<body>
 	
-		<button class="button" onclick=httpGET()><strong>Add Playlist</strong></button>
+		<button class="button" onclick=httpGET()><strong>Create Room</strong></button>
+		<button class="button" onclick=>Add Song</button>
 	
 		<script>
 		
 			function httpGET(){
 	       		//document.getElementById("demo").innerHTML = "running";
 	       		var client = new HttpClient();
-	       		client.get('http://10.70.8.120:8080/addPlaylist?token=' + token , function(response) {
+	       		client.get('http://10.70.8.120:8080/createRoom?token=' + token , function(response) {
 	       		    
 	       			var token = response;
 	       			//document.getElementById("demo").innerHTML = response;
