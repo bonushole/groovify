@@ -266,7 +266,17 @@ function filterFunction() {
 				function refreshList(){
 					var client = new HttpClient();
 		       		client.get('http://10.70.8.120:8080/fetchQueue?token=' + token , function(response) {
-		       		    console.log(response);
+	       		    console.log(response);
+	       		 	var scrollbox = document.getElementById('scrollbox');
+		       		while (scrollbox.firstChild) {
+		       			scrollbox.removeChild(scrollbox.firstChild);
+		       		}
+		       		var songs = JSON.parse(response);
+		       		for(let song of songs){
+		       			
+		       			addElement(song.name);
+		       			
+		       		}
 		       		    setTimeout(refreshList,10000);
 		       		});
 				}
