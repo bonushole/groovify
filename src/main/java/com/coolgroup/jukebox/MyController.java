@@ -24,6 +24,7 @@ public class MyController{// implements ApplicationRunner{
 	ArrayList<SpotUser> spotUsers = new ArrayList();
 	ArrayList<User> users = new ArrayList();
 	ArrayList<Room> rooms = new ArrayList();
+	ApiManager apiManager = new ApiManager();
 	
 	@RequestMapping(value = "/")
 	public String hello() {
@@ -55,7 +56,7 @@ public class MyController{// implements ApplicationRunner{
 			
 			if(room.getKey().equals(key)) {
 				
-				User user = new User(room);
+				User user = new User(room, apiManager);
 				users.add(user);
 				room.addUser(user);
 				
@@ -80,6 +81,18 @@ public class MyController{// implements ApplicationRunner{
 		}
 		
 		return "error";
+	}
+	@RequestMapping(value = "/addSong")
+	public String addSong(@RequestParam("token") String token) {
+		
+		for(User user : users) {
+			if(token.equals(user.getToken())) {
+				user.addSong();
+				return "";
+			}
+		}
+		
+		return "";
 	}
 	/**
 	@Override

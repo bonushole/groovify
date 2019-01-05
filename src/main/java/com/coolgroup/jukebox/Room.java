@@ -33,6 +33,7 @@ public class Room {
 	public void addTrack(Track track) {
 		
 		tracks.add(track);
+		owner.addTrackToPlaylist(track, playlist);
 		
 	}
 	public void updatePlaylist() {
