@@ -45,16 +45,15 @@ public class MyController{// implements ApplicationRunner{
 		return user.getToken();
 	}
 	@RequestMapping(value = "/addPlaylist")
-	public String AddPlaylist(@RequestParam("token") String token) {
+	public String AddPlaylist() {
 		
 		for(User user : users) {
-			if(token.equals(user.getToken())) {
-				user.addPlaylist();
-				return "";
+			if() {
+				
 			}
 		}
 		
-		return "error";
+		return "";
 	}
 	/**
 	@Override
