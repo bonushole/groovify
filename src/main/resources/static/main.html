@@ -3,6 +3,8 @@
     <head>
         <script type="text/javascript">
         
+        	var token;
+        
 	       	var HttpClient = function() {
 	       		this.get = function(aUrl, aCallback) {
 	       	    var anHttpRequest = new XMLHttpRequest();
@@ -24,7 +26,7 @@
 	       		var code = url.searchParams.get("code");
 	       		client.get('http://localhost:8080/callback?code=' + code , function(response) {
 	       		    
-	       			var token = response;
+	       			token = response;
 	       			//document.getElementById("demo").innerHTML = response;
 	       			
 	       		});
@@ -36,7 +38,20 @@
 	
 	<body>
 	
+		<button class="button" onclick=httpGET()><strong>Add Playlist</strong></button>
+	
 		<script>
+		
+			function httpGET(){
+	       		//document.getElementById("demo").innerHTML = "running";
+	       		var client = new HttpClient();
+	       		client.get('http://localhost:8080/addPlaylist?token=' + token , function(response) {
+	       		    
+	       			var token = response;
+	       			//document.getElementById("demo").innerHTML = response;
+	       			
+	       		});
+	       	}
 		
 		</script>
 	
