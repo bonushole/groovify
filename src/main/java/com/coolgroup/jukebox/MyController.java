@@ -72,7 +72,7 @@ public class MyController{// implements ApplicationRunner{
 	@RequestMapping(value = "/fetchQueue")
 	public String fetchQueue(@RequestParam("token") String token) {
 		
-		System.out.println("I tried to blow 'im");
+		//System.out.println("I tried to blow 'im");
 		
 		for(User user : users) {
 			
@@ -92,7 +92,9 @@ public class MyController{// implements ApplicationRunner{
 		System.out.println("creating room");
 		for(SpotUser user : spotUsers) {
 			if(token.equals(user.getToken())) {
-				return user.createRoom();
+				Room newRoom = user.createRoom();
+				rooms.add(newRoom);
+				return "http://10.70.8.120:8080/main.html?roomkey=" + newRoom.getKey();
 			}
 		}
 		

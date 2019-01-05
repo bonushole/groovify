@@ -41,10 +41,10 @@ public class SpotUser extends User{
 		return spotifyApi.getAccessToken();
 	}
 	
-	public String createRoom() {
+	public Room createRoom() {
 		
 		room = new Room(this, addPlaylist());
-		return room.getKey();
+		return room;
 		
 	}
 	

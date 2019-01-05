@@ -111,6 +111,7 @@ body {
 		       		client.get('http://10.70.8.120:8080/nonspotuser?roomkey=' + key , function(response) {
 		       		    
 			       	token = response;
+			       	window.alert(response);
 			       	refreshList();
 	       			
 	       			});
@@ -183,7 +184,8 @@ body {
 				function addElement(text) {
 				var scrollbox = document.getElementById('scrollbox');
     
-				// Create some element, e.g. div
+				
+
 				var newElement = document.createElement('div');
 				newElement.setAttribute('id', "some-id-for-new-element");
     			if(text == null){
@@ -199,7 +201,7 @@ body {
 					var client = new HttpClient();
 		       		client.get('http://10.70.8.120:8080/fetchQueue?token=' + token , function(response) {
 		       		    console.log(response);
-		       		    setTimeout(refreshList(),500);
+		       		    setTimeout(refreshList,10000);
 		       		});
 				}
 				//window.onload = refreshList();
