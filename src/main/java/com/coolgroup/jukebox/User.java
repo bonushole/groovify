@@ -1,5 +1,7 @@
 package com.coolgroup.jukebox;
 
+import com.wrapper.spotify.model_objects.specification.Track;
+
 public class User {
 
 	String token;
@@ -16,6 +18,11 @@ public class User {
 	public String getToken() {
 		
 		return "";
+	}
+	public void addSong() {
+		
+		Track song = ;
+		
 	}
 	
 }

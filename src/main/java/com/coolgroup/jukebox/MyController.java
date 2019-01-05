@@ -68,8 +68,8 @@ public class MyController{// implements ApplicationRunner{
 		
 	}
 	
-	@RequestMapping(value = "/addPlaylist")
-	public String AddPlaylist(@RequestParam("token") String token) {
+	@RequestMapping(value = "/createRoom")
+	public String createRoom(@RequestParam("token") String token) {
 		
 		for(SpotUser user : spotUsers) {
 			if(token.equals(user.getToken())) {
