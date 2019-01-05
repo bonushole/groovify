@@ -23,7 +23,7 @@ public class MyController{// implements ApplicationRunner{
 	@RequestMapping(value = "/")
 	public String hello() {
 	   //return gameUpdater.getGame().getItems();
-		SpotifyApi spotapi = new SpotifyApi;
+		//SpotifyApi spotapi = new SpotifyApi;
 		return "suck my pp";
 	
 	}
