@@ -27,6 +27,7 @@ public class MyController{// implements ApplicationRunner{
 	public String hello() {
 	   //return gameUpdater.getGame().getItems();
 		
+		System.out.println("lll");
 		Authenticator authenticator  = new Authenticator();
 		
 		return authenticator.authorizationCodeUri_Async();

@@ -15,7 +15,7 @@ import java.util.concurrent.Future;
 public class Authenticator {
 	private static final String clientId = "e2e54d16f0d342d6b2764b165c44fbf9";
 	  private static final String clientSecret = "64e7efc989374a6e9a84a6b5ba1d39f9";
-	  private static final URI redirectUri = SpotifyHttpManager.makeUri("http://localhost:8080/main.html");
+	  private static final URI redirectUri = SpotifyHttpManager.makeUri("http://10.70.8.120:8080/main.html");
 
 	  private final SpotifyApi spotifyApi = new SpotifyApi.Builder()
 	          .setClientId(clientId)
