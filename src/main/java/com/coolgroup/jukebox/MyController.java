@@ -2,13 +2,17 @@ package com.coolgroup.jukebox;
 
 
 
+import java.util.ArrayList;
+
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 //import org.springframework.boot.SpringApplication;
 //import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 
@@ -16,6 +20,8 @@ import org.springframework.stereotype.Controller;
 @ResponseBody
 @CrossOrigin
 public class MyController{// implements ApplicationRunner{
+	
+	ArrayList users = new ArrayList();
 	
 	@RequestMapping(value = "/")
 	public String hello() {
@@ -29,14 +35,12 @@ public class MyController{// implements ApplicationRunner{
 	
 	}
 	@RequestMapping(value = "/callback")//, consumes = "text/plain" )
-	public String callBack() {//@RequestBody String payload) {
-		System.out.println("Something happened");
-		return "something happened";
-		//return payload;
+	public String callBack(@RequestParam("code") String code) {
 		
-		//Authenticator authenticator = new Authenticator();
+		Authenticator authenticator = new Authenticator();
+		users.add(new User(authenticator.authorizationCode_Async(code)));
 		
-		//return "";
+		return "";
 	}
 	/**
 	@Override

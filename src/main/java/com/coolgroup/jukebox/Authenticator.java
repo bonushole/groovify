@@ -49,7 +49,7 @@ public class Authenticator {
 	      return "Error: " + e.getCause().getMessage();
 	    }
 	  }
-	  public void authorizationCode_Async(String code) {
+	  public SpotifyApi authorizationCode_Async(String code) {
 		  
 		  AuthorizationCodeRequest authorizationCodeRequest = spotifyApi.authorizationCode(code).build();
 		  
@@ -63,10 +63,14 @@ public class Authenticator {
 		      // Set access and refresh token for further "spotifyApi" object usage
 		      spotifyApi.setAccessToken(authorizationCodeCredentials.getAccessToken());
 		      spotifyApi.setRefreshToken(authorizationCodeCredentials.getRefreshToken());
-
+		      
 		      System.out.println("Expires in: " + authorizationCodeCredentials.getExpiresIn());
+		      
+		      return spotifyApi;
+		    		  
 		    } catch (InterruptedException | ExecutionException e) {
 		      System.out.println("Error: " + e.getCause().getMessage());
+		      return null;
 		    }
 		  }
 }
