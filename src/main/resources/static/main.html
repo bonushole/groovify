@@ -24,12 +24,25 @@
 	       		var url_string = window.location.href; //window.location.href
 	       		var url = new URL(url_string);
 	       		var code = url.searchParams.get("code");
-	       		client.get('http://10.70.8.120:8080/callback?code=' + code , function(response) {
-	       		    
-	       			token = response;
-	       			//document.getElementById("demo").innerHTML = response;
+	       		var key = url.searchParams.get("roomkey");
+	       		
+	       		if(code != null){
+		       		client.get('http://10.70.8.120:8080/callback?code=' + code , function(response) {
+		       		    
+		       		token = response;
+		       			
+		       		});
+	       		}
+	       		else if{
+		       		client.get('http://10.70.8.120:8080/nonspotuser?roomkey=' + key , function(response) {
+		       		    
+			       	token = response;
 	       			
-	       		});
+	       		}
+		       	else{
+		       		window.alert("no code you constipated rat");
+		       	}
+		       	}
 	       	}
 	       
         	window.onload = authenticate();

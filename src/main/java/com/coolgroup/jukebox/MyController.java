@@ -21,7 +21,9 @@ import org.springframework.stereotype.Controller;
 @CrossOrigin
 public class MyController{// implements ApplicationRunner{
 	
+	ArrayList<SpotUser> spotUsers = new ArrayList();
 	ArrayList<User> users = new ArrayList();
+	ArrayList<Room> rooms = new ArrayList();
 	
 	@RequestMapping(value = "/")
 	public String hello() {
@@ -40,15 +42,36 @@ public class MyController{// implements ApplicationRunner{
 		
 		Authenticator authenticator = new Authenticator();
 		
-		User user = new User(authenticator.authorizationCode_Async(code));
+		SpotUser user = new SpotUser(authenticator.authorizationCode_Async(code));
 		users.add(user);
+		spotUsers.add(user);
 		
 		return user.getToken();
 	}
+	@RequestMapping(value = "/nonspotuser")
+	public String addNonSpotUser(@RequestParam("roomkey") String key) {
+		
+		for(Room room : rooms) {
+			
+			if(room.getKey().equals(key)) {
+				
+				User user = new User(room);
+				users.add(user);
+				room.addUser(user);
+				
+				return user.getToken();
+			}
+			
+		}
+		
+		return "";
+		
+	}
+	
 	@RequestMapping(value = "/addPlaylist")
 	public String AddPlaylist(@RequestParam("token") String token) {
 		
-		for(User user : users) {
+		for(SpotUser user : spotUsers) {
 			if(token.equals(user.getToken())) {
 				user.addPlaylist();
 				//dummy change
