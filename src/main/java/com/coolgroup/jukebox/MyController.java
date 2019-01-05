@@ -19,7 +19,7 @@ public class MyController{// implements ApplicationRunner{
 	@RequestMapping(value = "/")
 	public String hello() {
 	   //return gameUpdater.getGame().getItems();
-		return "sup bruv";
+		return "suck my pp";
 	
 	}
 	/**
