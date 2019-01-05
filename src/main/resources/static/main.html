@@ -111,6 +111,7 @@ body {
 		       		client.get('http://10.70.8.120:8080/nonspotuser?roomkey=' + key , function(response) {
 		       		    
 			       	token = response;
+			       	refreshList();
 	       			
 	       			});
 	       		}
@@ -139,6 +140,7 @@ body {
 	       		var client = new HttpClient();
 	       		client.get('http://10.70.8.120:8080/createRoom?token=' + token , function(response) {
 	       		    window.alert(response);
+	       		 	refreshList();
 	       		});
 	       	}
 			function addSong(){
@@ -178,17 +180,29 @@ body {
 			</div>
 			<a onclick="addElement()">Click to add</a>
 			<script>
-				function addElement() {
+				function addElement(text) {
 				var scrollbox = document.getElementById('scrollbox');
     
 				// Create some element, e.g. div
 				var newElement = document.createElement('div');
 				newElement.setAttribute('id', "some-id-for-new-element");
-    
-				newElement.innerHTML = 'New element has been added!';
-    
+    			if(text == null){
+					newElement.innerHTML = 'New element has been added!';
+    			}
+    			else{
+    				newElement.innerHTML = text;
+    			}
 				scrollbox.appendChild(newElement);
 				}
+				
+				function refreshList(){
+					var client = new HttpClient();
+		       		client.get('http://10.70.8.120:8080/fetchQueue?token=' + token , function(response) {
+		       		    console.log(response);
+		       		    setTimeout(refreshList(),500);
+		       		});
+				}
+				//window.onload = refreshList();
 			</script>
 	</body>
 

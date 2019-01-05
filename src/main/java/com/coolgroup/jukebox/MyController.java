@@ -72,6 +72,8 @@ public class MyController{// implements ApplicationRunner{
 	@RequestMapping(value = "/fetchQueue")
 	public String fetchQueue(@RequestParam("token") String token) {
 		
+		System.out.println("I tried to blow 'im");
+		
 		for(User user : users) {
 			
 			if(user.getToken().equals(token)) {
