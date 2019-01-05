@@ -50,6 +50,7 @@ public class MyController{// implements ApplicationRunner{
 		for(User user : users) {
 			if(token.equals(user.getToken())) {
 				user.addPlaylist();
+				//dummy change
 				return "";
 			}
 		}
