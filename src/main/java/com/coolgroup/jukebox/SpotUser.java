@@ -47,7 +47,7 @@ public class SpotUser extends User{
 	
 	public Room createRoom() {
 		
-		room = new Room(this, addPlaylist());
+		room = new Room(this);//, addPlaylist());
 		return room;
 		
 	}

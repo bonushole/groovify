@@ -10,14 +10,14 @@ public class Room {
 	SpotUser owner;
 	String key;
 	ArrayList<User> users = new ArrayList<User>();
-	Playlist playlist;
+	//Playlist playlist;
 	ArrayList<Track> tracks = new ArrayList<Track>();
 	Track currentlyPlaying;
 	
-	public Room(SpotUser owner, Playlist playlist) {
+	public Room(SpotUser owner) {//, Playlist playlist) {
 		
 		this.owner = owner;
-		this.playlist = playlist;
+		//this.playlist = playlist;
 		key = KeyGenerator.generateKey();
 		
 	}
@@ -27,11 +27,13 @@ public class Room {
 		return key;
 		
 	}
+	/**
 	public Playlist getPlaylist() {
 		
 		return playlist;
 		
 	}
+	**/
 	public void addUser(User user) {
 		
 		users.add(user);
@@ -40,7 +42,7 @@ public class Room {
 	public void addTrack(Track track) {
 		
 		tracks.add(track);
-		owner.addTrackToPlaylist(track, playlist);
+		//owner.addTrackToPlaylist(track, playlist);
 		
 	}
 	public Track getTrack(String id) {
