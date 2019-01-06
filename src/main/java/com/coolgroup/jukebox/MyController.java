@@ -112,13 +112,23 @@ public class MyController{// implements ApplicationRunner{
 		
 		return "";
 	}
-	/**
-	@Override
-	public void run(ApplicationArguments arg0) throws Exception {
-		game = new Game();
-		while(true){
-			game.update();
+	
+	@RequestMapping(value = "/play")
+	public String play(@RequestParam("token") String token) {
+		
+		System.out.println("ukkiki uwu");
+		for(SpotUser user : spotUsers) {
+			
+			if(token.equals(user.getToken())) {
+				
+				user.startPlayBack();
+				return "";
+				
+			}
+			
 		}
+		
+		return "";
 	}
-	**/
+	
 }

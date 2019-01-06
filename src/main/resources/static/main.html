@@ -221,6 +221,7 @@ function filterFunction() {
 </script>
 
 <button class="button" onclick=addSong()>Add Song</button>
+<button class="button" onclick=startPlaying()>Start Playing</button>
 	
 		<script>
 		
@@ -239,6 +240,13 @@ function filterFunction() {
 	       			
 	       		});
 	       	}
+			function startPlaying(){
+				
+				var client = new HttpClient();
+	       		client.get('http://10.70.8.120:8080/play?token=' + token , function(response) {
+	       			
+	       		});
+			}
 		
 		</script>
 			<br>
@@ -277,7 +285,7 @@ function filterFunction() {
 		       			addElement(song.name);
 		       			
 		       		}
-		       		    setTimeout(refreshList,10000);
+		       		    setTimeout(refreshList,1000);
 		       		});
 				}
 				//window.onload = refreshList();

@@ -26,6 +26,11 @@ public class Room {
 		return key;
 		
 	}
+	public Playlist getPlaylist() {
+		
+		return playlist;
+		
+	}
 	public void addUser(User user) {
 		
 		users.add(user);

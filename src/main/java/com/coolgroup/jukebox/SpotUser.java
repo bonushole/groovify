@@ -3,10 +3,12 @@ package com.coolgroup.jukebox;
 import java.io.IOException;
 import java.util.concurrent.Future;
 
+import com.google.gson.JsonParser;
 import com.wrapper.spotify.SpotifyApi;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import com.wrapper.spotify.model_objects.specification.Playlist;
 import com.wrapper.spotify.model_objects.specification.Track;
+import com.wrapper.spotify.requests.data.player.StartResumeUsersPlaybackRequest;
 import com.wrapper.spotify.requests.data.playlists.AddTracksToPlaylistRequest;
 import com.wrapper.spotify.requests.data.playlists.CreatePlaylistRequest;
 import com.wrapper.spotify.requests.data.tracks.GetTrackRequest;
@@ -84,6 +86,22 @@ public class SpotUser extends User{
 			
 		}catch(Exception e) {}
 		  
+	}
+	
+	public void startPlayBack() {
+		
+		StartResumeUsersPlaybackRequest startResumeUsersPlaybackRequest = spotifyApi
+		          .startResumeUsersPlayback()
+		          .context_uri(room.getPlaylist().getUri())
+		          .build();
+	    try {
+	        final String string = startResumeUsersPlaybackRequest.execute();
+
+	        System.out.println("Null: " + string);
+	      } catch (IOException | SpotifyWebApiException e) {
+	        System.out.println("Error: " + e.getMessage());
+	      }
+		
 	}
 	
 }

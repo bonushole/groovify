@@ -24,7 +24,7 @@ public class Authenticator {
 	          .build();
 	  private final AuthorizationCodeUriRequest authorizationCodeUriRequest = spotifyApi.authorizationCodeUri()
 	          .state("x4xkmn9pu3j6ukrs8n")
-	          .scope("user-read-birthdate,user-read-email,playlist-modify-private")
+	          .scope("user-read-birthdate,user-read-email,playlist-modify-private,streaming")
 	          .show_dialog(true)
 	          .build();
 
