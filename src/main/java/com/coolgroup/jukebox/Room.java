@@ -12,6 +12,7 @@ public class Room {
 	ArrayList<User> users = new ArrayList<User>();
 	Playlist playlist;
 	ArrayList<Track> tracks = new ArrayList<Track>();
+	Track currentlyPlaying;
 	
 	public Room(SpotUser owner, Playlist playlist) {
 		
@@ -45,9 +46,26 @@ public class Room {
 	public Track getTrack(String id) {
 		return owner.getTrack(id);
 	}
+	public Track nextTrack() {
+		
+		Track nextTrack = tracks.get(0);
+		tracks.remove(0);
+		currentlyPlaying = nextTrack;
+		return nextTrack;
+		
+	}
 	public void updatePlaylist() {
 		
 		
+		
+	}
+	public void checkIfSongOver() {
+		
+		if( (currentlyPlaying != null) &&(owner.getTimeLeft() < 2000)) {
+			if(tracks.get(0)!=null) {
+				owner.startPlayBack();
+			}
+		}
 		
 	}
 	public ArrayList<SongsForGson> fetchSongs() {

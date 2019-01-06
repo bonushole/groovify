@@ -4,6 +4,7 @@ package com.coolgroup.jukebox;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 //import org.springframework.boot.SpringApplication;
@@ -23,7 +24,12 @@ public class MyController{// implements ApplicationRunner{
 	
 	ArrayList<SpotUser> spotUsers = new ArrayList();
 	ArrayList<User> users = new ArrayList();
-	ArrayList<Room> rooms = new ArrayList();
+	
+	@Autowired
+	RoomsManager roomsManager;
+	
+	//ArrayList<Room> rooms;
+	
 	ApiManager apiManager = new ApiManager();
 	
 	@RequestMapping(value = "/")
@@ -52,7 +58,7 @@ public class MyController{// implements ApplicationRunner{
 	@RequestMapping(value = "/nonspotuser")
 	public String addNonSpotUser(@RequestParam("roomkey") String key) {
 		
-		for(Room room : rooms) {
+		for(Room room : roomsManager.getRooms()) {
 			
 			if(room.getKey().equals(key)) {
 				
@@ -93,7 +99,7 @@ public class MyController{// implements ApplicationRunner{
 		for(SpotUser user : spotUsers) {
 			if(token.equals(user.getToken())) {
 				Room newRoom = user.createRoom();
-				rooms.add(newRoom);
+				roomsManager.addRoom(newRoom);
 				return "http://10.70.8.120:8080/main.html?roomkey=" + newRoom.getKey();
 			}
 		}
