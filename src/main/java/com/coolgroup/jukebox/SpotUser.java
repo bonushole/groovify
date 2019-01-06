@@ -7,12 +7,14 @@ import com.google.gson.JsonParser;
 import com.wrapper.spotify.SpotifyApi;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import com.wrapper.spotify.model_objects.miscellaneous.CurrentlyPlayingContext;
+import com.wrapper.spotify.model_objects.specification.Paging;
 import com.wrapper.spotify.model_objects.specification.Playlist;
 import com.wrapper.spotify.model_objects.specification.Track;
 import com.wrapper.spotify.requests.data.player.GetInformationAboutUsersCurrentPlaybackRequest;
 import com.wrapper.spotify.requests.data.player.StartResumeUsersPlaybackRequest;
 import com.wrapper.spotify.requests.data.playlists.AddTracksToPlaylistRequest;
 import com.wrapper.spotify.requests.data.playlists.CreatePlaylistRequest;
+import com.wrapper.spotify.requests.data.search.simplified.SearchTracksRequest;
 import com.wrapper.spotify.requests.data.tracks.GetTrackRequest;
 import com.wrapper.spotify.requests.data.users_profile.GetCurrentUsersProfileRequest;
 
@@ -108,6 +110,22 @@ public class SpotUser extends User{
 			
 		}catch(Exception e) {}
 		  
+	}
+	public Track[] searchTracks(String query) {
+		
+		SearchTracksRequest searchTracksRequest = spotifyApi.searchTracks(query).limit(10).offset(0).build();
+		try {
+	      Paging<Track> trackPaging = searchTracksRequest.execute();
+
+	      System.out.println("Total: " + trackPaging.getTotal());
+	      
+	      return trackPaging.getItems();
+	      
+	    } catch (IOException | SpotifyWebApiException e) {
+	      System.out.println("Error: " + e.getMessage());
+	      return null;
+	    }
+		
 	}
 	
 	public void startPlayBack() {

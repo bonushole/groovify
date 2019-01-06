@@ -28,8 +28,15 @@ public class User {
 	
 	public void addSong() {
 		
-		System.out.println("we made it here");
+		//System.out.println("we made it here");
 		Track song = room.getTrack((Math.random()>.5)? "5QIbR39hAEDIOkr4ggh4xc":"3WibbMr6canxRJXhNtAvLU");
+		System.out.println(song);
+		room.addTrack(song);
+	}
+	public void addSong(String songId) {
+		
+		//System.out.println("we made it here");
+		Track song = room.getTrack(songId);
 		System.out.println(song);
 		room.addTrack(song);
 	}
@@ -37,6 +44,12 @@ public class User {
 		
 		Gson gson = new Gson();
 		return gson.toJson(room.fetchSongs());
+		
+	}
+	public String searchSongs(String query) {
+		
+		Gson gson = new Gson();
+		return gson.toJson(room.searchTracks(query));
 		
 	}
 	

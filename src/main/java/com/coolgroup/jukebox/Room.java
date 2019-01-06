@@ -70,13 +70,29 @@ public class Room {
 		}
 		
 	}
+	
+	public ArrayList<SongsForGson> searchTracks(String query){
+		
+		Track[] tracksFromSearch =  owner.searchTracks(query);
+		
+		ArrayList<SongsForGson> parameterizedTracks = new ArrayList<SongsForGson>();
+		
+		for(Track track : tracksFromSearch) {
+			
+			parameterizedTracks.add(new SongsForGson(track.getName(),track.getId()));
+			
+		}
+		
+		return parameterizedTracks;
+	}
+	
 	public ArrayList<SongsForGson> fetchSongs() {
 		
 		ArrayList<SongsForGson> elements = new ArrayList<SongsForGson>();
 		
 		for (Track track : tracks) {
 			
-			elements.add(new SongsForGson(track.getName()));
+			elements.add(new SongsForGson(track.getName(),track.getId()));
 		}
 		return elements;
 		

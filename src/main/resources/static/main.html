@@ -165,7 +165,7 @@ body {
 		       		});
 	       		}
 	       		else if(key!=null){
-	       			document.getElementById("createRoomButton").style.display = "none";
+	       			//document.getElementById("createRoomButton").style.display = "none";
 		       		client.get('http://10.70.8.120:8080/nonspotuser?roomkey=' + key , function(response) {
 		       		    
 			       	token = response;
@@ -195,6 +195,7 @@ body {
   <button onclick="myFunction()" class="dropbtn">Search songs</button>
   <div id="myDropdown" class="dropdown-content">
     <input type="text" placeholder="Search..." id="myInput" onkeyup="filterFunction()">
+    	<div id="options"></div>
     </div>
 </div>
 
@@ -211,14 +212,44 @@ function filterFunction() {
   filter = input.value.toUpperCase();
   div = document.getElementById("myDropdown");
   a = div.getElementsByTagName("a");
-  for (i = 0; i < a.length; i++) {
-    txtValue = a[i].textContent || a[i].innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      a[i].style.display = "";
-    } else {
-      a[i].style.display = "none";
-    }
-  }
+  
+  var client = new HttpClient();
+	client.get('http://10.70.8.120:8080/search?token=' + token +"&query="+filter, function(response) {
+		console.log(response);
+		
+		var options = JSON.parse(response);
+		//console.log(options[0].name);
+		var dropdown = document.getElementById("options");
+		
+		while (dropdown.firstChild) {
+   			dropdown.removeChild(dropdown.firstChild);
+   		}
+		
+		for(let option of options){
+			console.log(option);
+			var newElement = document.createElement('div');
+			newElement.setAttribute('id', "some-id-for-new-element");
+			newElement.innerHTML = option.name;
+			
+			var newButton = document.createElement('BUTTON');
+			newButton.setAttribute('id',option.id);
+			newButton.innerHTML = '+';
+			
+			newButton.onclick = function(){ addSongWithId(this.id) };
+			
+			dropdown.appendChild(newElement);
+			newElement.appendChild(newButton);
+			
+		}
+	});
+//   for (i = 0; i < a.length; i++) {
+//     txtValue = a[i].textContent || a[i].innerText;
+//     if (txtValue.toUpperCase().indexOf(filter) > -1) {
+//       a[i].style.display = "";
+//     } else {
+//       a[i].style.display = "none";
+//     }
+//   }
 }
 </script>
 
@@ -237,9 +268,16 @@ function filterFunction() {
 	       		});
 	       	}
 			function addSong(){
-	       		//document.getElementById("demo").innerHTML = "running";
+	       		
 	       		var client = new HttpClient();
 	       		client.get('http://10.70.8.120:8080/addSong?token=' + token , function(response) {
+	       			
+	       		});
+	       	}
+			function addSongWithId(id){
+	       		
+	       		var client = new HttpClient();
+	       		client.get('http://10.70.8.120:8080/addSongWithId?token=' + token+'&songId='+id , function(response) {
 	       			
 	       		});
 	       	}
@@ -275,6 +313,7 @@ function filterFunction() {
 				}
 				
 				function refreshList(){
+					document.getElementById("createRoomButton").style.display = "none";
 					var client = new HttpClient();
 		       		client.get('http://10.70.8.120:8080/fetchQueue?token=' + token , function(response) {
 	       		    console.log(response);

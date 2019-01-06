@@ -93,6 +93,23 @@ public class MyController{// implements ApplicationRunner{
 		return "error";
 	}
 	
+	@RequestMapping(value = "/search")
+	public String searchSongs(@RequestParam("token") String token, @RequestParam("query") String query) {
+		
+		for(User user : users) {
+			
+			if(user.getToken().equals(token)) {
+				
+				return user.searchSongs(query);
+				
+			}
+			
+		}
+		
+		return "error";
+		
+	}
+	
 	@RequestMapping(value = "/createRoom")
 	public String createRoom(@RequestParam("token") String token) {
 		System.out.println("creating room");
@@ -112,6 +129,18 @@ public class MyController{// implements ApplicationRunner{
 		for(User user : users) {
 			if(token.equals(user.getToken())) {
 				user.addSong();
+				return "";
+			}
+		}
+		
+		return "";
+	}
+	@RequestMapping(value = "/addSongWithId")
+	public String addSongWithId(@RequestParam("token") String token, @RequestParam("songId") String songId) {
+		
+		for(User user : users) {
+			if(token.equals(user.getToken())) {
+				user.addSong(songId);
 				return "";
 			}
 		}
